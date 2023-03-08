@@ -60,7 +60,7 @@ public class Main
 		myAccount.limit = 1000000.0;
 		
 		myAccount.withdraw(myAccount.balance);
-        myAccount.showBalance(myAccount.balance);
+        	myAccount.showBalance(myAccount.balance);
 		myAccount.deposit(myAccount.balance);
 		myAccount.showBalance(myAccount.balance);
 		myAccount.showType(myAccount.type);
