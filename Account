@@ -1,0 +1,68 @@
+import java.util.*;
+
+class Account {
+    int ID;
+    int type;
+    String name;
+    double balance;
+    double limit;
+    double amount;
+    
+    boolean withdraw(double balance) {
+        this.balance = balance;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter an amount: ");
+        double amount = sc.nextDouble();
+        if(this.balance < amount){
+            return false;
+        } else {
+            this.balance = this.balance - amount;
+            return true;
+        }
+    }
+    
+    boolean deposit(double balance) {
+        this.balance = balance;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter an amount: ");
+        double amount = sc.nextDouble();
+        if(this.limit < this.balance + amount){
+            return false;
+        } else {
+            this.balance = this.balance + amount;
+            return true;
+        }
+    }
+    
+    void showBalance(double balance){
+        System.out.println("Balance: " + this.balance);
+    }
+    
+    void showType(int type){
+        System.out.println("Type: " + this.type);
+    }
+    
+    void transfer(double balance){
+        
+    }
+    
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		Account myAccount;
+		myAccount = new Account();
+		
+		myAccount.name = "Ian";
+		myAccount.type = 1;
+		myAccount.balance = 1000.0;
+		myAccount.limit = 1000000.0;
+		
+		myAccount.withdraw(myAccount.balance);
+        myAccount.showBalance(myAccount.balance);
+		myAccount.deposit(myAccount.balance);
+		myAccount.showBalance(myAccount.balance);
+		myAccount.showType(myAccount.type);
+	}
+}
