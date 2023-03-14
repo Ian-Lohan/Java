@@ -1,5 +1,9 @@
 import java.util.*;
 
+package Account;
+
+import java.util.*;
+
 class Account {
     int ID;
     int type;
@@ -42,27 +46,78 @@ class Account {
         System.out.println("Type: " + this.type);
     }
     
-    void transfer(double balance){
-        
+    double update(double balance, double multiplier){
+        this.balance = balance * (0.1 * multiplier);
+        System.out.println("Balance updated! The new balance is " + this.balance);
+        return balance;
     }
     
+}
+
+class Worker {
+String name;
+String cpf;
+double balance;
+
+}
+
+class Manager extends Worker{
+int password;
+int numberWorkers;
+
+public boolean Authentic(int password) {
+	if (this.password == password) {
+		System.out.println("Access allowed.");
+		return true;
+	} else {
+		System.out.println("Access denied.");
+		return false;
+	}
+}
+}
+
+class CurrentAccount extends Account{
+double multiplier; 
+}
+
+class DepositAccount extends Account{
+double multiplier;
 }
 
 public class Main
 {
 	public static void main(String[] args) {
+		/*
 		Account myAccount;
 		myAccount = new Account();
-		
 		myAccount.name = "Ian";
-		myAccount.type = 1;
+		myAccount.type = 135;
 		myAccount.balance = 1000.0;
 		myAccount.limit = 1000000.0;
 		
 		myAccount.withdraw(myAccount.balance);
-        	myAccount.showBalance(myAccount.balance);
+        myAccount.showBalance(myAccount.balance);
 		myAccount.deposit(myAccount.balance);
 		myAccount.showBalance(myAccount.balance);
 		myAccount.showType(myAccount.type);
+		*/
+		
+		CurrentAccount account1;
+		account1 = new CurrentAccount();
+		account1.name = "Current";
+		account1.type = 123;
+		account1.balance = 1000.0;
+		account1.limit = 10000.0;
+		account1.multiplier = 2.0;
+		account1.update(account1.balance, account1.multiplier);
+		
+		DepositAccount account2;
+		account2 = new DepositAccount();
+		account2.name = "Deposit";
+		account2.type = 321;
+		account2.balance = 1000.0;
+		account2.limit = 10000.0;
+		account2.multiplier = 3.0;
+		account2.update(account2.balance, account2.multiplier);
 	}
 }
