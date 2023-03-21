@@ -3,14 +3,15 @@ package Account;
 import java.util.*;
 
 class Account {
-    int ID;
-    int type;
-    String name;
-    double balance;
-    double limit;
-    double amount;
+    private int ID;
+    private int type;
+    private String name;
+    private double balance;
+    private double limit;
+    private double amount;
+    public Client titular = new Client();
     
-    boolean withdraw(double balance) {
+    public boolean withdraw(double balance) {
         this.balance = balance;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter an amount: ");
@@ -23,7 +24,7 @@ class Account {
         }
     }
     
-    boolean deposit(double balance) {
+    public boolean deposit(double balance) {
         this.balance = balance;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter an amount: ");
@@ -36,86 +37,174 @@ class Account {
         }
     }
     
-    void showBalance(double balance){
+    public void showBalance(double balance){
         System.out.println("Balance: " + this.balance);
     }
     
-    void showType(int type){
+    public void showType(int type){
         System.out.println("Type: " + this.type);
     }
     
-    double update(double balance, double multiplier){
+    public double update(double balance, double multiplier){
         this.balance = balance + (balance * 0.1 * multiplier);
         System.out.println("Balance updated! The new balance is " + this.balance);
         return balance;
     }
     
+    public double getID() {
+        return this.ID;
+    }
+    
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    
+    public double getType() {
+        return this.type;
+    }
+    
+    public void setType(int type) {
+        this.type = type;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public double getBalance() {
+        return this.balance;
+    }
+    
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    
+    public double getLimit() {
+        return this.limit;
+    }
+    
+    public void setLimit(double limit) {
+        this.limit = limit;
+    }
+    
+    public double getAmount() {
+        return this.amount;
+    }
+    
+    public void setID(double amount) {
+        this.amount = amount;
+    }
 }
+
+package Account; 
 
 class Worker {
-String name;
-String cpf;
-double balance;
-
+    String name;
+    String cpf;
+    double balance;
 }
+
+package Account;
 
 class Manager extends Worker{
-int password;
-int numberWorkers;
+    int password;
+    int numberWorkers;
 
-public boolean Authentic(int password) {
-	if (this.password == password) {
-		System.out.println("Access allowed.");
-		return true;
-	} else {
-		System.out.println("Access denied.");
-		return false;
-	}
+    public boolean Authentic(int password) {
+    	if (this.password == password) {
+    		System.out.println("Access allowed.");
+    		return true;
+    	} else {
+    		System.out.println("Access denied.");
+    		return false;
+    	}
+    }
 }
-}
+
+package Account;
 
 class CurrentAccount extends Account{
-double multiplier; 
+    double multiplier; 
 }
+
+package Account;
 
 class DepositAccount extends Account{
-double multiplier;
+	double multiplier;
 }
 
-public class Main
-{
+package Account;
+
+public class Main{
 	public static void main(String[] args) {
-		/*
-		Account myAccount;
-		myAccount = new Account();
-		myAccount.name = "Ian";
-		myAccount.type = 135;
-		myAccount.balance = 1000.0;
-		myAccount.limit = 1000000.0;
+	/*
+	Account myAccount;
+	myAccount = new Account();
+	myAccount.name = "Ian";
+	myAccount.type = 135;
+	myAccount.balance = 1000.0;
+	myAccount.limit = 1000000.0;
+	
+	myAccount.withdraw(myAccount.balance);
+       	myAccount.showBalance(myAccount.balance);
+	myAccount.deposit(myAccount.balance);
+	myAccount.showBalance(myAccount.balance);
+	myAccount.showType(myAccount.type);
+	*/
 		
-		myAccount.withdraw(myAccount.balance);
-        myAccount.showBalance(myAccount.balance);
-		myAccount.deposit(myAccount.balance);
-		myAccount.showBalance(myAccount.balance);
-		myAccount.showType(myAccount.type);
-		*/
+	/*
+	CurrentAccount account1;
+	account1 = new CurrentAccount();
+	account1.name = "Current";
+	account1.type = 123;
+	account1.balance = 1000.0;
+	account1.limit = 10000.0;
+	account1.multiplier = 2.0;
+	account1.update(account1.balance, account1.multiplier);
+	
+	DepositAccount account2;
+	account2 = new DepositAccount();
+	account2.name = "Deposit";
+	account2.type = 321;
+	account2.balance = 1000.0;
+	account2.limit = 10000.0;
+	account2.multiplier = 3.0;
+	account2.update(account2.balance, account2.multiplier);
+	*/
 		
-		CurrentAccount account1;
-		account1 = new CurrentAccount();
-		account1.name = "Current";
-		account1.type = 123;
-		account1.balance = 1000.0;
-		account1.limit = 10000.0;
-		account1.multiplier = 2.0;
-		account1.update(account1.balance, account1.multiplier);
-		
-		DepositAccount account2;
-		account2 = new DepositAccount();
-		account2.name = "Deposit";
-		account2.type = 321;
-		account2.balance = 1000.0;
-		account2.limit = 10000.0;
-		account2.multiplier = 3.0;
-		account2.update(account2.balance, account2.multiplier);
+	Account myAccount = new Account();
+	Client c = new Client();
+	
+	/*
+	myAccount.setID(10);
+	System.out.println(myAccount.getID());
+	
+	myAccount.setType(123);
+	System.out.println(myAccount.getType());
+	
+	myAccount.setName("Ian");
+	System.out.println(myAccount.getName());
+	
+	myAccount.setBalance(1000.0);
+	System.out.println(myAccount.getBalance());
+	
+	myAccount.setLimit(10000.0);
+	System.out.println(myAccount.getLimit());
+	*/
+	
+	myAccount.titular = c;
+	
+	c.setName("Ian");
+	System.out.println(c.getName());
+	
+	c.setSurname("Lohan");
+	System.out.println(c.getSurname());
+	
+	c.setCPF("XXXXXXXXX-XX");
+	System.out.println(c.getCPF());
 	}
 }
