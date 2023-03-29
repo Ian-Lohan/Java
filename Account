@@ -9,7 +9,11 @@ class Account {
     private double balance;
     private double limit;
     private double amount;
-    public Client titular = new Client();
+    public Client titular;
+    
+    Account(Client titular) {
+    	this.titular = titular;
+    }
     
     public boolean withdraw(double balance) {
         this.balance = balance;
@@ -100,21 +104,66 @@ class Account {
     }
 }
 
-package Account; 
+package Account;
 
 class Worker {
-    String name;
-    String cpf;
-    double balance;
+    private String name;
+    private String cpf;
+    private double balance;
+    
+    public double getBonification() {
+    	return this.balance * 0.10;
+    }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+    
 }
 
 package Account;
 
 class Manager extends Worker{
-    int password;
-    int numberWorkers;
+    private int password;
+    private int numberWorkers;
 
-    public boolean Authentic(int password) {
+    public int getPassword() {
+		return password;
+	}
+
+	public void setPassword(int password) {
+		this.password = password;
+	}
+
+	public int getNumberWorkers() {
+		return numberWorkers;
+	}
+
+	public void setNumberWorkers(int numberWorkers) {
+		this.numberWorkers = numberWorkers;
+	}
+
+	public boolean Authentic(int password) {
     	if (this.password == password) {
     		System.out.println("Access allowed.");
     		return true;
@@ -123,88 +172,135 @@ class Manager extends Worker{
     		return false;
     	}
     }
+    
+	/*
+	@Override
+    public double getBonification() {
+    	return this.balance * 0.15;
+    }
+    */
+	
+	/* Alternative
+	public double getBonification() {
+    	return super.getBonification() + 1000;
+    }
+    */
+    
 }
 
 package Account;
 
 class CurrentAccount extends Account{
-    double multiplier; 
+    CurrentAccount(Client titular) {
+		super(titular);
+		// TODO Auto-generated constructor stub
+	}
+
+	double multiplier; 
+    
 }
 
 package Account;
 
 class DepositAccount extends Account{
+	DepositAccount(Client titular) {
+		super(titular);
+		// TODO Auto-generated constructor stub
+	}
+
 	double multiplier;
+}
+
+package Account;
+
+public class Client {
+	private String name;
+	private String surname;
+	private int CPF;
+	
+	public String getName() {
+        return this.name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getSurame() {
+        return this.surname;
+    }
+    
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    
+    public double getCPF() {
+        return this.CPF;
+    }
+    
+    public void setCPF(int CPF) {
+        this.CPF = CPF;
+    }
+    
+    Client(String name, String surname, int CPF){
+    	this.name = name;
+    	this.surname = surname;
+    	this.CPF = CPF;
+    }
+
+}
+
+package Account;
+
+public class BonificationControl {
+	private double totalBonifications = 0;
+	
+	public void register(Worker worker) {
+		this.totalBonifications += worker.getBonification();
+	}
+	
+	public double getTotalBonifications() {
+		return this.totalBonifications;
+	}
 }
 
 package Account;
 
 public class Main{
 	public static void main(String[] args) {
-	/*
-	Account myAccount;
-	myAccount = new Account();
-	myAccount.name = "Ian";
-	myAccount.type = 135;
-	myAccount.balance = 1000.0;
-	myAccount.limit = 1000000.0;
-	
-	myAccount.withdraw(myAccount.balance);
-       	myAccount.showBalance(myAccount.balance);
-	myAccount.deposit(myAccount.balance);
-	myAccount.showBalance(myAccount.balance);
-	myAccount.showType(myAccount.type);
-	*/
 		
-	/*
-	CurrentAccount account1;
-	account1 = new CurrentAccount();
-	account1.name = "Current";
-	account1.type = 123;
-	account1.balance = 1000.0;
-	account1.limit = 10000.0;
-	account1.multiplier = 2.0;
-	account1.update(account1.balance, account1.multiplier);
-	
-	DepositAccount account2;
-	account2 = new DepositAccount();
-	account2.name = "Deposit";
-	account2.type = 321;
-	account2.balance = 1000.0;
-	account2.limit = 10000.0;
-	account2.multiplier = 3.0;
-	account2.update(account2.balance, account2.multiplier);
-	*/
-		
-	Account myAccount = new Account();
-	Client c = new Client();
+	Client c = new Client("Ian", "Lohan", 123456789);
+	Account myAccount = new Account(c);
 	
 	/*
-	myAccount.setID(10);
-	System.out.println(myAccount.getID());
+	Worker worker = new Worker();
+    worker.setBalance(1000.0);
+    System.out.println(worker.getBonification());
 	
-	myAccount.setType(123);
-	System.out.println(myAccount.getType());
-	
-	myAccount.setName("Ian");
-	System.out.println(myAccount.getName());
-	
-	myAccount.setBalance(1000.0);
-	System.out.println(myAccount.getBalance());
-	
-	myAccount.setLimit(10000.0);
-	System.out.println(myAccount.getLimit());
+	Manager manager = new Manager();
+    manager.setBalance(1000.0);
+    System.out.println(manager.getBonification());
 	*/
 	
-	myAccount.titular = c;
+	/*
+	Manager manager = new Manager();
+	Worker worker = manager;
+	worker.setBalance(5000.0);
+	System.out.println(manager.getBonification());
+	}
+	*/
 	
-	c.setName("Ian");
-	System.out.println(c.getName());
+	BonificationControl control = new BonificationControl();
 	
-	c.setSurname("Lohan");
-	System.out.println(c.getSurname());
+	Manager worker1 = new Manager();
+	worker1.setBalance(1000.0);
+	control.register(worker1);
 	
-	c.setCPF("XXXXXXXXX-XX");
-	System.out.println(c.getCPF());
+	Worker worker2 = new Worker();
+	worker2.setBalance(1000.0);
+	control.register(worker2);
+	
+	System.out.println(control.getTotalBonifications());
+	
 	}
 }
