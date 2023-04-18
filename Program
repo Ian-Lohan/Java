@@ -1,0 +1,84 @@
+package Program;
+
+public class Program implements Runnable{
+	
+	private int id;
+
+	public double getID() {
+        return this.id;
+    }
+    
+    public void setID(int id) {
+        this.id = id;
+    }
+	
+	public void run () {
+		for (int i = 0; i < 1000; i++) {
+			System.out.println("Program " + id + "value: " + i);
+		}
+	}
+}
+
+package Program;
+
+public class Test {
+  public static void main(String[] args) {
+
+    Program p1 = new Program();
+    p1.setID(1);
+
+    Thread t1 = new Thread(p1);
+    t1.start();
+
+    Program p2 = new Program();
+    p2.setID(2);
+
+    Thread t2 = new Thread(p2);
+    t2.start();
+  }
+}
+
+package Program;
+
+public class Counter {
+	
+	long counter = 0;
+	
+	public synchronized void add(long value) {
+		this.counter += value;
+	}
+}
+
+package Program;
+
+public class CounterThread extends Thread{
+	
+	protected Counter counter = null;
+	
+	public CounterThread(Counter counter) {
+		this.counter = counter;
+	}
+
+	public void run() {
+		for(int i=0; i<10; i++) {
+			counter.add(i);
+		}
+	}
+}
+
+package Program;
+
+public class Example {
+	public static void main(String[] args) {
+		Counter counterA = new Counter();
+		Counter counterB = new Counter();
+		
+		Thread threadA = new CounterThread(counterA);
+		Thread threadB = new CounterThread(counterB);
+		
+		threadA.start();
+		threadB.start();
+		
+		/* add print */
+	}
+}
